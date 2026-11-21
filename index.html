@@ -262,7 +262,7 @@ footer{border-top:1px solid var(--border);padding:36px 0;color:var(--muted);font
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <span class="pill"><i></i>Version 1.0.5 · 100% offline · Android 7.0+</span>
+        <span class="pill"><i></i>Version <span data-ver>1.0.5</span> · 100% offline · Android 7.0+</span>
         <h1>Your complete <span class="grad">HSC ICT</span> companion.</h1>
         <p class="sub">এইচএসসি আইসিটি সম্পূর্ণ অফলাইন সহায়িকা</p>
         <p class="lead">Study all six chapters, run C code, preview web pages, simulate logic gates and networks, and practise board-standard MCQs. Everything is inside one app, with no internet needed.</p>
@@ -383,14 +383,14 @@ footer{border-top:1px solid var(--border);padding:36px 0;color:var(--muted);font
   <section id="download" class="alt">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Download · v1.0.5</span>
+        <span class="eyebrow" data-ver-dl>Download · v1.0.5</span>
         <h2>Get <span class="grad">ICT Assistant</span> for Android</h2>
         <p>Pick the APK that matches your device from the latest release. Not sure which one? Choose the universal build.</p>
       </div>
       <div class="grid g3">
-        <article class="card apk"><span class="badge">Recommended</span><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div><h3>arm64-v8a</h3><p>Modern 64-bit Android phones and tablets. This is the smallest download.</p><code>ICT-Assistant-1.0.5-arm64-v8a-release.apk</code><a class="btn btn-primary" href="https://github.com/itspabel/ICT-Assistant/releases/download/v1.0.5/ICT-Assistant-1.0.5-arm64-v8a-release.apk">Download</a></article>
-        <article class="card apk"><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div><h3>armeabi-v7a</h3><p>Older 32-bit Android devices.</p><code>ICT-Assistant-1.0.5-armeabi-v7a-release.apk</code><a class="btn btn-ghost" href="https://github.com/itspabel/ICT-Assistant/releases/download/v1.0.5/ICT-Assistant-1.0.5-armeabi-v7a-release.apk">Download</a></article>
-        <article class="card apk"><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div><h3>Universal</h3><p>Works on any device running Android 7.0 or newer (API 24+).</p><code>ICT-Assistant-1.0.5-universal-release.apk</code><a class="btn btn-ghost" href="https://github.com/itspabel/ICT-Assistant/releases/download/v1.0.5/ICT-Assistant-1.0.5-universal-release.apk">Download</a></article>
+        <article class="card apk"><span class="badge">Recommended</span><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div><h3>arm64-v8a</h3><p>Modern 64-bit Android phones and tablets. This is the smallest download.</p><code data-code="arm64-v8a">ICT-Assistant-1.0.5-arm64-v8a-release.apk</code><a class="btn btn-primary" data-apk="arm64-v8a" href="https://github.com/itspabel/ICT-Assistant/releases/download/v1.0.5/ICT-Assistant-1.0.5-arm64-v8a-release.apk">Download</a></article>
+        <article class="card apk"><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div><h3>armeabi-v7a</h3><p>Older 32-bit Android devices.</p><code data-code="armeabi-v7a">ICT-Assistant-1.0.5-armeabi-v7a-release.apk</code><a class="btn btn-ghost" data-apk="armeabi-v7a" href="https://github.com/itspabel/ICT-Assistant/releases/download/v1.0.5/ICT-Assistant-1.0.5-armeabi-v7a-release.apk">Download</a></article>
+        <article class="card apk"><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div><h3>Universal</h3><p>Works on any device running Android 7.0 or newer (API 24+).</p><code data-code="universal">ICT-Assistant-1.0.5-universal-release.apk</code><a class="btn btn-ghost" data-apk="universal" href="https://github.com/itspabel/ICT-Assistant/releases/download/v1.0.5/ICT-Assistant-1.0.5-universal-release.apk">Download</a></article>
       </div>
       <div class="steps">
         <div class="step"><b>1</b><span>Download the recommended APK for your device from the Releases page.</span></div>
@@ -405,8 +405,8 @@ footer{border-top:1px solid var(--border);padding:36px 0;color:var(--muted);font
   <section>
     <div class="wrap">
       <div class="rel">
-        <h3>What’s new <span>v1.0.5</span></h3>
-        <ul>
+        <h3>What’s new <span data-ver-v>v1.0.5</span></h3>
+        <ul id="notes">
           <li><svg class="i" aria-hidden="true"><use href="#i-sparkle"/></svg>Upgraded C and HTML/CSS/JS IDEs with syntax highlighting, synced line numbers, undo and redo, auto-indent, font-size controls and live error hints.</li>
           <li><svg class="i" aria-hidden="true"><use href="#i-sparkle"/></svg>New C programming algorithm simulator with custom input and live step-by-step execution.</li>
           <li><svg class="i" aria-hidden="true"><use href="#i-sparkle"/></svg>Network topology simulator now handles realistic broken-cable fault routing.</li>
@@ -470,7 +470,51 @@ footer{border-top:1px solid var(--border);padding:36px 0;color:var(--muted);font
     root.setAttribute('data-theme',next);
     try{localStorage.setItem('ict-theme',next)}catch(e){}
   });
+
+  /* ---- Auto-update version, release notes and APK links from the latest GitHub release ---- */
+  var REPO='itspabel/ICT-Assistant',KEY='ict-release-v1',TTL=30*60*1000;
+  function clean(t){return t.replace(/!?\[([^\]]*)\]\([^)]*\)/g,'$1').replace(/[*_`~]+/g,'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim()}
+  function mb(n){return n?(n/1048576).toFixed(1)+' MB':''}
+  function apply(r){
+    if(!r||!r.tag_name)return;
+    var ver=String(r.tag_name).replace(/^v/i,'');
+    document.querySelectorAll('[data-ver]').forEach(function(e){e.textContent=ver});
+    document.querySelectorAll('[data-ver-v]').forEach(function(e){e.textContent='v'+ver});
+    document.querySelectorAll('[data-ver-dl]').forEach(function(e){e.textContent='Download · v'+ver});
+    (r.assets||[]).forEach(function(a){
+      var n=(a.name||'').toLowerCase();
+      if(n.slice(-4)!=='.apk')return;
+      var arch=n.indexOf('arm64')>-1?'arm64-v8a':n.indexOf('armeabi')>-1?'armeabi-v7a':n.indexOf('universal')>-1?'universal':'';
+      if(!arch)return;
+      var link=document.querySelector('[data-apk="'+arch+'"]'),code=document.querySelector('[data-code="'+arch+'"]');
+      if(link){link.href=a.browser_download_url;link.textContent=mb(a.size)?'Download · '+mb(a.size):'Download'}
+      if(code)code.textContent=a.name;
+    });
+    var ul=document.getElementById('notes');
+    if(ul&&r.body){
+      var lines=r.body.split(/\r?\n/),items=[];
+      lines.forEach(function(l){var m=l.match(/^\s*(?:[-*+]|\d+\.)\s+(.*)$/);if(m){var t=clean(m[1]);if(t)items.push(t)}});
+      if(!items.length)lines.forEach(function(l){if(!/^\s*#/.test(l)){var t=clean(l);if(t)items.push(t)}});
+      if(items.length){
+        ul.innerHTML='';
+        items.slice(0,8).forEach(function(t){
+          var li=document.createElement('li');
+          li.innerHTML='<svg class="i" aria-hidden="true"><use href="#i-sparkle"/></svg>';
+          li.appendChild(document.createTextNode(t));
+          ul.appendChild(li);
+        });
+      }
+    }
+  }
+  try{var c=JSON.parse(localStorage.getItem(KEY)||'null');if(c&&Date.now()-c.t<TTL)apply(c.d)}catch(e){}
+  var fresh=false;try{var cc=JSON.parse(localStorage.getItem(KEY)||'null');fresh=!!(cc&&Date.now()-cc.t<TTL)}catch(e){}
+  if(!fresh&&window.fetch){
+    fetch('https://api.github.com/repos/'+REPO+'/releases/latest',{headers:{'Accept':'application/vnd.github+json'}})
+      .then(function(res){if(!res.ok)throw 0;return res.json()})
+      .then(function(d){apply(d);try{localStorage.setItem(KEY,JSON.stringify({t:Date.now(),d:{tag_name:d.tag_name,body:d.body,assets:(d.assets||[]).map(function(a){return{name:a.name,size:a.size,browser_download_url:a.browser_download_url}})}}))}catch(e){}})
+      .catch(function(){/* keep the static content already in the page */});
+  }
 })();
 </script>
 </body>
-  </html>
+</html>
