@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ict-aide.asf.run/sitemap.xml
