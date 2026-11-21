@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="../ict_assistant_icon_transparent.png" alt="ICT Assistant Logo" width="120" height="120" />
+<img src="./ict_assistant_icon_transparent.png" alt="ICT Assistant Logo" width="120" height="120" />
 
 # 📱 ICT Assistant
 
