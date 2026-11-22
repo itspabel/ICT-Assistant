@@ -412,10 +412,10 @@ section{padding:84px 0}
 .apk p{margin-bottom:14px}
 .apk .btn{margin-top:auto;justify-content:center}
 .dl-note{text-align:center;color:var(--muted);font-size:.88rem;margin-top:26px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
-@media(max-width:700px){.steps{grid-template-columns:1fr}}
+.steps-title{text-align:center;font-size:1.25rem;margin-top:44px}
+.steps{display:grid;grid-template-columns:1fr;gap:12px;max-width:780px;margin:18px auto 0}
 .step{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:14px;background:var(--surface);border:1px solid var(--border);font-size:.93rem;color:var(--text-2)}
-.step b{flex:none;width:30px;height:30px;border-radius:50%;background:var(--grad);color:var(--on-grad);display:grid;place-items:center;font:700 .85rem var(--font-display)}
+.step>b{flex:none;width:30px;height:30px;border-radius:50%;background:var(--grad);color:var(--on-grad);display:grid;place-items:center;font:700 .85rem var(--font-display)}
 
 
 /* featured apk + download modal */
@@ -442,6 +442,12 @@ section{padding:84px 0}
 .m-actions .btn{justify-content:center;width:100%}
 @media(prefers-reduced-motion:reduce){.pbar.ind i{animation:none}.modal-card{animation:none}}
 
+.step .hl{color:var(--text);font-weight:600;font-family:inherit}
+.safe-badge{display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:9px 18px 9px 12px;border-radius:99px;border:1px solid rgba(16,185,129,.45);background:rgba(16,185,129,.12);color:var(--text);font-size:.9rem;font-weight:600}
+.safe-badge .i{width:22px;height:22px;color:var(--green)}
+.safe-badge small{font-weight:500;color:var(--text-2);font-size:.82rem}
+.safe-badge small::before{content:"· "}
+@media(max-width:600px){.safe-badge{flex-wrap:wrap;justify-content:center;border-radius:18px;text-align:center}.safe-badge small{flex-basis:100%}.safe-badge small::before{content:none}}
 /* release */
 .rel{max-width:820px;margin:0 auto;padding:32px;border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--border-strong);box-shadow:var(--glow)}
 .rel h3{display:flex;align-items:center;gap:10px;font-size:1.25rem;margin-bottom:18px}
@@ -656,16 +662,21 @@ footer{border-top:1px solid var(--border);padding:36px 0;color:var(--muted);font
         <span class="eyebrow" data-ver-dl>Download · v1.0.5</span>
         <h2>Get <span class="grad">ICT Assistant</span> for Android</h2>
         <p>Tap Download on the recommended Universal build. It works on every Android 7.0+ phone, so there is nothing to figure out.</p>
+        <span class="safe-badge"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg>Safe to install <small>Official build from GitHub Releases</small></span>
       </div>
       <div class="grid g3">
         <article class="card apk featured"><span class="badge">Recommended</span><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div><h3>Universal</h3><p>Works on every Android device running 7.0 or newer. Not sure which one to pick? Choose this.</p><code data-code="universal">ICT-Assistant-1.0.5-universal-release.apk</code><a class="btn btn-primary" data-apk="universal" href="https://github.com/itspabel/ICT-Assistant/releases/download/v1.0.5/ICT-Assistant-1.0.5-universal-release.apk">Download</a></article>
         <article class="card apk"><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div><h3>arm64-v8a</h3><p>A smaller file, built only for modern 64-bit phones.</p><code data-code="arm64-v8a">ICT-Assistant-1.0.5-arm64-v8a-release.apk</code><a class="btn btn-ghost" data-apk="arm64-v8a" href="https://github.com/itspabel/ICT-Assistant/releases/download/v1.0.5/ICT-Assistant-1.0.5-arm64-v8a-release.apk">Download</a></article>
         <article class="card apk"><div class="ico"><svg class="i" aria-hidden="true"><use href="#i-download"/></svg></div><h3>armeabi-v7a</h3><p>For older 32-bit Android devices.</p><code data-code="armeabi-v7a">ICT-Assistant-1.0.5-armeabi-v7a-release.apk</code><a class="btn btn-ghost" data-apk="armeabi-v7a" href="https://github.com/itspabel/ICT-Assistant/releases/download/v1.0.5/ICT-Assistant-1.0.5-armeabi-v7a-release.apk">Download</a></article>
       </div>
+      <h3 class="steps-title">How to install</h3>
       <div class="steps">
         <div class="step"><b>1</b><span>Tap Download on the recommended Universal APK.</span></div>
-        <div class="step"><b>2</b><span>Open the file and allow “Install from unknown sources” if Android asks.</span></div>
-        <div class="step"><b>3</b><span>Launch ICT Assistant and start learning offline.</span></div>
+        <div class="step"><b>2</b><span>When it finishes, your browser may ask whether to keep or save the file. Choose Keep or Save.</span></div>
+        <div class="step"><b>3</b><span>Open the downloaded file and tap Install.</span></div>
+        <div class="step"><b>4</b><span>If Google Play Protect shows a scan option during install, tap <b class="hl">Scan app</b> and let it finish.</span></div>
+        <div class="step"><b>5</b><span>If Android says the app is blocked or from an unknown source, tap <b class="hl">More details</b>, then <b class="hl">Install anyway</b>. You can also allow installs from your browser when Android asks.</span></div>
+        <div class="step"><b>6</b><span>Open ICT Assistant and start learning offline.</span></div>
       </div>
       <p class="dl-note">Only install APK files from sources you trust.</p>
     </div>
@@ -895,4 +906,4 @@ footer{border-top:1px solid var(--border);padding:36px 0;color:var(--muted);font
 })();
 </script>
 </body>
-</html>
+ </html>
